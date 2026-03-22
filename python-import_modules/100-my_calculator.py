@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-import sys
-from calculator_1 import add, sub, mul, div
+if __name__ == "__main__":
+    import sys
+    from calculator_1 import add, sub, mul, div
 
-
-def main():
     if len(sys.argv) != 4:
         print("Usage: ./100-my_calculator.py <a> <operator> <b>")
         sys.exit(1)
@@ -25,7 +24,3 @@ def main():
 
     result = ops[operator](a, b)
     print("{} {} {} = {}".format(a, operator, b, result))
-
-
-if __name__ == "__main__":
-    main()
