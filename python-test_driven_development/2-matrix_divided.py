@@ -4,13 +4,14 @@
 
 def matrix_divided(matrix, div):
     """Divides all elements of a matrix by a number."""
+    msg_type = "matrix must be a matrix (list of lists) of integers/floats"
+
     if not isinstance(div, (int, float)):
         raise TypeError("div must be a number")
 
     if div == 0:
         raise ZeroDivisionError("division by zero")
 
-    msg_type = "matrix must be a matrix (list of lists) of integers/floats"
     if not isinstance(matrix, list) or len(matrix) == 0:
         raise TypeError(msg_type)
 
