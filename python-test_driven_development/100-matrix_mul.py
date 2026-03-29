@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 This module contains a function for matrix multiplication.
-It provides strict validation for input types, empty matrices, 
+It provides strict validation for input types, empty matrices,
 non-numeric elements, and dimensional compatibility.
 """
 
@@ -15,7 +15,7 @@ def matrix_mul(m_a, m_b):
         m_b (list of lists): The second matrix (integers or floats).
 
     Raises:
-        TypeError: If inputs are not lists, not lists of lists, 
+        TypeError: If inputs are not lists, not lists of lists,
                    contain non-numbers, or are not rectangular.
         ValueError: If matrices are empty or cannot be multiplied.
 

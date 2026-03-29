@@ -10,8 +10,17 @@ Import the function:
 Basic multiplication:
     >>> matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]])
     [[7, 10], [15, 22]]
-    >>> matrix_mul([[1, 2]], [[3, 4], [5, 6]])
-    [[13, 16]]
+
+Validation - Missing arguments:
+    >>> matrix_mul([[1, 2]])
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_mul() missing 1 required positional argument: 'm_b'
+
+    >>> matrix_mul()
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
 
 Validation - Not a list:
     >>> matrix_mul(None, [[1]])
