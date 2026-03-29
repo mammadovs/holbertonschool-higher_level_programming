@@ -1,57 +1,43 @@
-#!/usr/bin/python3
-"""
-This module contains a function that multiplies two matrices using NumPy.
-"""
-import numpy as np
+==================================
+The ``101-lazy_matrix_mul`` module
+==================================
 
+Using ``lazy_matrix_mul``:
+    >>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
 
-def lazy_matrix_mul(m_a, m_b):
-    """
-    Multiplies two matrices using the NumPy module.
+Basic multiplication:
+    >>> print(lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
+    [[ 7 10]
+     [15 22]]
 
-    Args:
-        m_a (list of lists): The first matrix.
-        m_b (list of lists): The second matrix.
+    >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
+    [[13 16]]
 
-    Returns:
-        numpy.ndarray: The matrix product of m_a and m_b.
+Validation - Scalar/String operands:
+    >>> lazy_matrix_mul("Holberton", [[5, 6], [7, 8]])
+    Traceback (most recent call last):
+    ...
+    TypeError: Scalar operands are not allowed, use '*' instead
 
-    Raises:
-        TypeError: If m_a or m_b is not a list or a numpy array.
-        ValueError: If m_a or m_b cannot be multiplied.
-    """
-    # 1. Базовая проверка типов на скаляры (требование задания)
-    if not isinstance(m_a, (list, np.ndarray)):
-        raise TypeError("Scalar operands are not allowed, use '*' instead")
-    if not isinstance(m_b, (list, np.ndarray)):
-        raise TypeError("Scalar operands are not allowed, use '*' instead")
+    >>> lazy_matrix_mul([[5, 6], [7, 8]], "Holberton")
+    Traceback (most recent call last):
+    ...
+    TypeError: Scalar operands are not allowed, use '*' instead
 
-    # 2. Ручная проверка размеров для имитации ошибки NumPy 1.x
-    try:
-        # Считаем количество строк и столбцов
-        rows_a = len(m_a)
-        cols_a = len(m_a[0]) if rows_a > 0 and isinstance(m_a[0], list) else 0
-        rows_b = len(m_b)
-        cols_b = len(m_b[0]) if rows_b > 0 and isinstance(m_b[0], list) else 0
+Validation - Empty:
+    >>> lazy_matrix_mul([[]], [[5, 6], [7, 8]]) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+    ...
+    ValueError: shapes (1,0) and (2,2) not aligned: 0 (dim 1) != 2 (dim 0)
 
-        # Если матрицы несовместимы (cols_a != rows_b)
-        if cols_a != rows_b:
-            # Формируем строку ТОЧНО как хочет чекер
-            err = "shapes ({},{}) and ({},{}) not aligned: {} (dim 1) != {} (dim 0)"
-            raise ValueError(err.format(rows_a, cols_a, rows_b, cols_b,
-                                        cols_a, rows_b))
-    except (TypeError, IndexError):
-        # Если структура списков совсем битая, отдаем на откуп NumPy
-        pass
+Validation - Non-numeric:
+    >>> lazy_matrix_mul([[5, "6"], [7, 8]], [[5, 6], [7, 8]]) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+    ...
+    TypeError: invalid data type for einsum
 
-    # 3. Основное умножение и перехват ошибок типов
-    try:
-        return np.matmul(m_a, m_b)
-    except TypeError as e:
-        # Для случаев типа [[5, "6"]]: новый NumPy кидает специфическую ошибку
-        if "loop with signature" in str(e) or "ufunc 'matmul'" in str(e):
-            raise TypeError("invalid data type for einsum")
-        raise e
-    except ValueError as e:
-        # На всякий случай пробрасываем остальные ValueError
-        raise e
+Validation - Size mismatch:
+    >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]]) # doctest: +ELLIPSIS
+    Traceback (most recent call last):
+    ...
+    ValueError: shapes (1,3) and (2,2) not aligned: 3 (dim 1) != 2 (dim 0)
