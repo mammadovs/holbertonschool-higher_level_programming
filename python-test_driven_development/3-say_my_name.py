@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-This is the 3-say_my_name module.
-This module supplies one function, say_my_name(), which prints a specific string
-using a first name and an optional last name.
+This module provides a function that prints a name.
+It validates that inputs are strings before printing.
 """
 
 
@@ -11,8 +10,8 @@ def say_my_name(first_name, last_name=""):
     Prints "My name is <first_name> <last_name>"
 
     Args:
-        first_name (str): The first name string.
-        last_name (str): The last name string (optional).
+        first_name: The first name string.
+        last_name: The last name string.
 
     Raises:
         TypeError: If first_name or last_name are not strings.
