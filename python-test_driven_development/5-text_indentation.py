@@ -18,19 +18,14 @@ def text_indentation(text):
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    # Clean the string and iterate through it
-    # We use a flag to handle the spaces after the special characters
     special_chars = [".", "?", ":"]
-    
     i = 0
-    # Strip leading whitespace from the very beginning
     text = text.strip()
-    
+
     while i < len(text):
         print(text[i], end="")
         if text[i] in special_chars:
             print("\n")
-            # Skip all spaces immediately following a special character
             if i + 1 < len(text) and text[i + 1] == " ":
                 while i + 1 < len(text) and text[i + 1] == " ":
                     i += 1
