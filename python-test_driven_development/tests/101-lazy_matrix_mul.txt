@@ -1,0 +1,25 @@
+The ``101-lazy_matrix_mul`` module
+==================================
+
+Using ``lazy_matrix_mul``
+-------------------------
+
+Import the function:
+    >>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+
+Basic multiplication:
+    >>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]])
+    array([[ 7, 10],
+           [15, 22]])
+
+Validation - Incompatible dimensions:
+    >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    ...
+    ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n,k),(k,m)->(n,m) (size 2 is different from 3)
+
+Validation - Not a list/Numeric:
+    >>> lazy_matrix_mul([[1, "string"]], [[1, 2]])
+    Traceback (most recent call last):
+    ...
+    TypeError: ...
