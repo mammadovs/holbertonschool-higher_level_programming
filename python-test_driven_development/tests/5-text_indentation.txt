@@ -1,0 +1,36 @@
+==================================
+How to use 5-text_indentation module
+==================================
+
+First, import the function:
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Basic usage with special characters:
+    >>> text_indentation("Hello. How are you? Fine: thanks.")
+    Hello.
+    <BLANKLINE>
+    How are you?
+    <BLANKLINE>
+    Fine:
+    <BLANKLINE>
+    thanks.
+    <BLANKLINE>
+
+Testing for extra spaces (should be stripped):
+    >>> text_indentation("  Wait.   What?   ")
+    Wait.
+    <BLANKLINE>
+    What?
+    <BLANKLINE>
+
+Testing for non-string input:
+    >>> text_indentation(123)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+
+Testing missing argument:
+    >>> text_indentation()
+    Traceback (most recent call last):
+        ...
+    TypeError: text_indentation() missing 1 required positional argument: 'text'
