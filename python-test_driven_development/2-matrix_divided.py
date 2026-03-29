@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""Module that contains a function that divides all elements of a matrix."""
+"""Module for matrix division."""
 
 
 def matrix_divided(matrix, div):
+    """Divides all elements of a matrix by a number."""
     if not isinstance(div, (int, float)):
         raise TypeError("div must be a number")
 
