@@ -17,13 +17,12 @@ def lazy_matrix_mul(m_a, m_b):
         numpy.ndarray: The matrix product of m_a and m_b.
 
     Raises:
-        TypeError: If m_a or m_b is not a list or a numpy array (for scalars).
+        TypeError: If m_a or m_b is not a list or a numpy array.
+        ValueError: If m_a or m_b cannot be multiplied.
     """
-    # Manual check for scalars/strings to match specific checker requirements
     if not isinstance(m_a, (list, np.ndarray)):
         raise TypeError("Scalar operands are not allowed, use '*' instead")
     if not isinstance(m_b, (list, np.ndarray)):
         raise TypeError("Scalar operands are not allowed, use '*' instead")
 
-    # np.matmul handles empty matrices, non-numeric types, and size mismatches
     return np.matmul(m_a, m_b)

@@ -1,4 +1,7 @@
-Import the function:
+The ``101-lazy_matrix_mul`` module
+==================================
+
+Using ``lazy_matrix_mul``:
     >>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
 
 Basic multiplication:
@@ -20,19 +23,19 @@ Validation - Scalar/String operands:
     TypeError: Scalar operands are not allowed, use '*' instead
 
 Validation - Empty:
-    >>> lazy_matrix_mul([[]], [[5, 6], [7, 8]])
+    >>> lazy_matrix_mul([[]], [[5, 6], [7, 8]]) # doctest: +ELLIPSIS
     Traceback (most recent call last):
     ...
     ValueError: matmul: ...
 
 Validation - Non-numeric:
-    >>> lazy_matrix_mul([[5, "6"], [7, 8]], [[5, 6], [7, 8]])
+    >>> lazy_matrix_mul([[5, "6"], [7, 8]], [[5, 6], [7, 8]]) # doctest: +ELLIPSIS
     Traceback (most recent call last):
     ...
     numpy...Error: ...
 
 Validation - Size mismatch:
-    >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]])
+    >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]]) # doctest: +ELLIPSIS
     Traceback (most recent call last):
     ...
     ValueError: matmul: ...
