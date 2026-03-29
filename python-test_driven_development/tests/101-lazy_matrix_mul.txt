@@ -8,35 +8,42 @@ Import the function:
     >>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
 
 Basic multiplication:
-    >>> lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]])
-    array([[ 7, 10],
-           [15, 22]])
+    >>> print(lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]))
+    [[ 7 10]
+     [15 22]]
+    >>> print(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]))
+    [[13 16]]
 
-Validation - String where list expected:
-    >>> lazy_matrix_mul("Holberton", [[5, 6], [7, 8]])
+Validation - Not a list:
+    >>> lazy_matrix_mul("Holberton", [[1, 2]])
     Traceback (most recent call last):
     ...
-    TypeError: Scalar operands are not allowed, use '*' instead
-
-    >>> lazy_matrix_mul([[5, 6], [7, 8]], "Holberton")
+    TypeError: m_a must be a list
+    >>> lazy_matrix_mul([[1, 2]], "Holberton")
     Traceback (most recent call last):
     ...
-    TypeError: Scalar operands are not allowed, use '*' instead
+    TypeError: m_b must be a list
+
+Validation - Not a list of lists:
+    >>> lazy_matrix_mul([1, 2], [[1, 2]])
+    Traceback (most recent call last):
+    ...
+    TypeError: m_a must be a list of lists
 
 Validation - Empty:
-    >>> lazy_matrix_mul([[]], [[5, 6], [7, 8]])
+    >>> lazy_matrix_mul([], [[1, 2]])
     Traceback (most recent call last):
     ...
-    ValueError: setting an array element with a sequence.
+    ValueError: m_a can't be empty
 
-Validation - Non-numeric elements:
-    >>> lazy_matrix_mul([[5, "6"], [7, 8]], [[5, 6], [7, 8]])
+Validation - Not rectangular:
+    >>> lazy_matrix_mul([[1, 2], [1]], [[1, 2], [3, 4]])
     Traceback (most recent call last):
     ...
-    TypeError: invalid data type for einsum
+    TypeError: each row of m_a must be of the same size
 
-Validation - Dimensional mismatch:
+Validation - Mismatched dimensions:
     >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]])
     Traceback (most recent call last):
     ...
-    ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n,k),(k,m)->(n,m) (size 2 is different from 3)
+    ValueError: m_a and m_b can't be multiplied
