@@ -42,6 +42,7 @@ Handling errors for Infinity:
     >>> add_integer(float('inf'), 4)
     Traceback (most recent call last):
     OverflowError: cannot convert float infinity to integer
+
 Handling errors for NaN:
     >>> add_integer(float('nan'))
     Traceback (most recent call last):
