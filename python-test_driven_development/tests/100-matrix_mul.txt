@@ -1,11 +1,11 @@
-The ``matrix_mul`` module
-=========================
+The ``100-matrix_mul`` module
+=============================
 
 Using ``matrix_mul``
 --------------------
 
 Import the function:
-    >>> matrix_mul = __import__('matrix_mul').matrix_mul
+    >>> matrix_mul = __import__('100-matrix_mul').matrix_mul
 
 Basic multiplication:
     >>> matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]])
