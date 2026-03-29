@@ -12,14 +12,13 @@ Basic multiplication:
     array([[ 7, 10],
            [15, 22]])
 
-Validation - String instead of list:
+Validation - String where list expected:
     >>> lazy_matrix_mul("Holberton", [[5, 6], [7, 8]])
     Traceback (most recent call last):
     ...
     TypeError: Scalar operands are not allowed, use '*' instead
 
-Validation - Not a list of lists:
-    >>> lazy_matrix_mul([[1, 2]], "Holberton")
+    >>> lazy_matrix_mul([[5, 6], [7, 8]], "Holberton")
     Traceback (most recent call last):
     ...
     TypeError: Scalar operands are not allowed, use '*' instead
@@ -28,16 +27,16 @@ Validation - Empty:
     >>> lazy_matrix_mul([[]], [[5, 6], [7, 8]])
     Traceback (most recent call last):
     ...
-    ValueError: ...
+    ValueError: setting an array element with a sequence.
 
-Validation - Non-numeric:
+Validation - Non-numeric elements:
     >>> lazy_matrix_mul([[5, "6"], [7, 8]], [[5, 6], [7, 8]])
     Traceback (most recent call last):
     ...
-    TypeError: ...
+    TypeError: invalid data type for einsum
 
-Validation - Incompatible dimensions:
+Validation - Dimensional mismatch:
     >>> lazy_matrix_mul([[1, 2, 3]], [[1, 2], [3, 4]])
     Traceback (most recent call last):
     ...
-    ValueError: ...
+    ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n,k),(k,m)->(n,m) (size 2 is different from 3)
