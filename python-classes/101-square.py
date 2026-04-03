@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """
-Module for defining a square with size and position.
-Includes printing and area calculation.
+Module defining a Square class with size and position.
+
+Includes methods to calculate area, print the square, and
+produce a string representation respecting its position.
 """
 
 
@@ -13,9 +15,9 @@ class Square:
         Initialize a Square instance.
 
         Args:
-            size (int, optional): The size of the square (default 0).
+            size (int, optional): Size of the square (default 0).
             position (tuple, optional): Tuple of 2 positive integers
-                                        defining the position (default (0, 0)).
+                                        defining position (default (0, 0)).
 
         Raises:
             TypeError: If size is not an integer.
@@ -61,18 +63,18 @@ class Square:
 
     def my_print(self):
         """
-        Print the square to stdout using the '#' character.
+        Print the square using the '#' character.
         Takes into account the position attribute.
         """
         if self.__size == 0:
             print()
             return
 
-        # Print vertical offset
+        # vertical offset
         for _ in range(self.__position[1]):
             print()
 
-        # Print each row of the square
+        # square rows with horizontal offset
         for _ in range(self.__size):
             print(" " * self.__position[0] + "#" * self.__size)
 
@@ -86,10 +88,13 @@ class Square:
             return ""
 
         lines = []
-        # Add vertical offset
+        # vertical offset
         for _ in range(self.__position[1]):
             lines.append("")
-        # Add square lines with horizontal offset
+
+        # square rows with horizontal offset
         for _ in range(self.__size):
-            lines.append(" " * self.__position[0] + "#" * self.__size)
+            line = " " * self.__position[0] + "#" * self.__size
+            lines.append(line)
+
         return "\n".join(lines)
