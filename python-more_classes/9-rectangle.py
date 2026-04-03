@@ -3,9 +3,10 @@
 string representation, repr, deletion message, instance counter, print symbol,
 comparison by area, and a class method to create squares."""
 
+
 class Rectangle:
-    """Represent a rectangle with width and height, count instances, print symbol,
-    comparison by area, and square creation."""
+    """Represent a rectangle with width and height, count instances,
+    print symbol, comparison by area, and square creation."""
 
     number_of_instances = 0
     print_symbol = "#"
@@ -80,8 +81,8 @@ class Rectangle:
         return "Rectangle({}, {})".format(self.__width, self.__height)
 
     def __del__(self):
-        """Print a message when a Rectangle instance is deleted and update counter."""
-        print("Прощай, прямоугольник...")
+        """Print a message and update instance counter on deletion."""
+        print("Bye rectangle...")
         type(self).number_of_instances -= 1
 
     @staticmethod
