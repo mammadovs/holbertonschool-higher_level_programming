@@ -2,9 +2,9 @@
 """
 Module 6-square
 
-This module defines a class Square that represents a square with a size and
-a position. The square can calculate its area and be printed using the '#'
-character, respecting its position offset.
+This module defines a class Square that represents a square with a size
+and a position. The square can calculate its area and be printed using
+the '#' character at the specified position offset.
 """
 
 
@@ -27,10 +27,12 @@ class Square:
 
         Args:
             size (int, optional): Side length of the square (default 0).
-            position (tuple, optional): Printing offset as (x, y) (default (0, 0)).
+            position (tuple, optional): Printing offset as (x, y) 
+                                        (default (0, 0)).
 
         Raises:
-            TypeError: If size is not an integer or position is not a tuple of 2 non-negative integers.
+            TypeError: If size is not an integer or position is not a tuple
+                       of 2 non-negative integers.
             ValueError: If size is less than 0.
         """
         self.size = size
@@ -72,8 +74,8 @@ class Square:
         Print the square using the '#' character.
 
         Respects the position offset:
-            - position[0] adds spaces before each row
-            - position[1] adds blank lines before the square
+          - position[0] adds spaces before each row
+          - position[1] adds blank lines before the square
         Prints an empty line if size is 0.
         """
         if self.__size == 0:
