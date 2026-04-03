@@ -3,8 +3,10 @@
 Module 0-square
 
 Defines a class Square.
-The class is currently empty and serves as a template for future square implementations.
+The class is currently empty and serves as a template for future
+square implementations.
 """
+
 
 class Square:
     """
