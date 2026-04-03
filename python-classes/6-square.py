@@ -27,7 +27,7 @@ class Square:
 
         Args:
             size (int, optional): Side length of the square (default 0).
-            position (tuple, optional): Printing offset as (x, y) 
+            position (tuple, optional): Printing offset as (x, y)
                                         (default (0, 0)).
 
         Raises:
