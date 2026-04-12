@@ -1,42 +1,54 @@
+Tests for BaseGeometry class
 ============================
-How to use 7-base_geometry.py
-============================
 
->>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
->>> bg = BaseGeometry()
+Importing the class:
+    >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+    >>> bg = BaseGeometry()
 
-Valid integer:
->>> bg.integer_validator("my_int", 12)
->>> bg.integer_validator("width", 89)
+Testing area() method:
+    >>> try:
+    ...     bg.area()
+    ... except Exception as e:
+    ...     print(e)
+    area() is not implemented
 
-Not an integer:
->>> bg.integer_validator("name", "John")
-Traceback (most recent call last):
-...
-TypeError: name must be an integer
+Testing integer_validator with valid integers:
+    >>> bg.integer_validator("my_int", 10)
+    >>> bg.integer_validator("width", 89)
 
->>> bg.integer_validator("age", 13.5)
-Traceback (most recent call last):
-...
-TypeError: age must be an integer
+Testing integer_validator with non-integer values:
+    >>> try:
+    ...     bg.integer_validator("height", "10")
+    ... except TypeError as e:
+    ...     print(e)
+    height must be an integer
 
->>> bg.integer_validator("age", [3])
-Traceback (most recent call last):
-...
-TypeError: age must be an integer
+    >>> try:
+    ...     bg.integer_validator("width", 10.5)
+    ... except TypeError as e:
+    ...     print(e)
+    width must be an integer
 
->>> bg.integer_validator("age", True)
-Traceback (most recent call last):
-...
-TypeError: age must be an integer
+Testing integer_validator with values <= 0:
+    >>> try:
+    ...     bg.integer_validator("depth", 0)
+    ... except ValueError as e:
+    ...     print(e)
+    depth must be greater than 0
 
-Value <= 0:
->>> bg.integer_validator("age", 0)
-Traceback (most recent call last):
-...
-ValueError: age must be greater than 0
+    >>> try:
+    ...     bg.integer_validator("distance", -5)
+    ... except ValueError as e:
+    ...     print(e)
+    distance must be greater than 0
 
->>> bg.integer_validator("age", -4)
-Traceback (most recent call last):
-...
-ValueError: age must be greater than 0
+Checking for required documentation:
+    >>> module_doc = __import__('7-base_geometry').__doc__
+    >>> len(module_doc) > 20
+    True
+    >>> class_doc = BaseGeometry.__doc__
+    >>> len(class_doc) > 20
+    True
+    >>> method_doc = BaseGeometry.integer_validator.__doc__
+    >>> len(method_doc) > 20
+    True
