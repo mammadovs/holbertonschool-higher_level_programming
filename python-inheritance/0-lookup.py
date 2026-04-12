@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+This module provides a function to lookup object attributes.
+"""
+
+
 def lookup(obj):
     """
     Returns a list object containing the available
