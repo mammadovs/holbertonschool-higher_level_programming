@@ -1,27 +1,22 @@
-#!/usr/bin/python3
-# Import the MyList class from the file 1-my_list.py
-MyList = __import__('1-my_list').MyList
+The `MyList` class
+=================
 
-# Initialize an instance of MyList
-my_list = MyList()
+How to use:
+    >>> MyList = __import__('1-my_list').MyList
+    >>> my_list = MyList()
+    >>> my_list.append(1)
+    >>> my_list.append(4)
+    >>> my_list.append(2)
+    >>> my_list.append(3)
+    >>> my_list.append(5)
+    >>> print(my_list)
+    [1, 4, 2, 3, 5]
+    >>> my_list.print_sorted()
+    [1, 2, 3, 4, 5]
+    >>> print(my_list)
+    [1, 4, 2, 3, 5]
 
-# Add elements using standard list methods inherited by MyList
-my_list.append(1)
-my_list.append(4)
-my_list.append(2)
-my_list.append(3)
-my_list.append(5)
-
-# Print the original list to show current order
-print(my_list)
-
-# Call the custom method to print the list in ascending order
-my_list.print_sorted()
-
-# Print the list again to confirm the original order is preserved
-print(my_list)
-
-# Additional test with negative numbers and zero
-print("\nTesting with different values:")
-test_list = MyList([9, -2, 0, 7])
-test_list.print_sorted()
+Testing with other types (like negative numbers):
+    >>> my_list = MyList([10, -5, 0])
+    >>> my_list.print_sorted()
+    [-5, 0, 10]
