@@ -20,3 +20,8 @@ Testing with other types (like negative numbers):
 >>> my_list = MyList([10, -5, 0])
 >>> my_list.print_sorted()
 [-5, 0, 10]
+
+Testing with an empty list:
+>>> my_list = MyList()
+>>> my_list.print_sorted()
+[]
