@@ -1,3 +1,3 @@
--- Вычисляет среднюю температуру (в Фаренгейтах) для каждого города
--- Результат сортируется по температуре в порядке убывания
+-- Displays the average temperature (Fahrenheit) by city
+-- The results are ordered by temperature in descending order
 SELECT city, AVG(value) AS avg_temp FROM temperatures GROUP BY city ORDER BY avg_temp DESC;
