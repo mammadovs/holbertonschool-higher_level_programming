@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-Lists all states with a name starting with N (upper N)
-from the database hbtn_0e_0_usa.
+This module lists all states from the database hbtn_0e_0_usa
+starting with the letter N.
 """
 import MySQLdb
 import sys
@@ -9,9 +9,10 @@ import sys
 
 def list_n_states():
     """
-    Connects to the database and fetches states starting with 'N'.
+    Connects to the MySQL database and retrieves states
+    starting with 'N', sorted by id.
     """
-    # Arguments: 1: username, 2: password, 3: database name
+    # Database connection using command line arguments
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -20,24 +21,25 @@ def list_n_states():
         db=sys.argv[3]
     )
 
+    # Creating a cursor to execute the query
     cursor = db.cursor()
-    
-    # Using format to include the 'N%' filter
-    # Sorting by states.id ASC
-    query = "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
-    cursor.execute(query)
 
-    rows = cursor.fetchall()
-    for row in rows:
-        # Printing only if name starts with 'N' (additional check)
-        if row[1][0] == 'N':
-            print(row)
+    # Selecting states starting with 'N'.
+    # BINARY is used to ensure it matches 'N' and not 'n'.
+    cursor.execute("SELECT * FROM states WHERE name LIKE BINARY 'N%' "
+                   "ORDER BY states.id ASC")
 
+    # Fetching and printing the results
+    query_rows = cursor.fetchall()
+    for row in query_rows:
+        print(row)
+
+    # Closing cursor and database connection
     cursor.close()
     db.close()
 
 
 if __name__ == "__main__":
-    # Ensure script only runs if exactly 3 arguments are provided
-    if len(sys.argv) == 4:
-        list_n_states()
+    # Ensure the script does not execute when imported
+    list_n_states()
+
