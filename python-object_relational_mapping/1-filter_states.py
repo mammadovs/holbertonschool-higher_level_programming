@@ -42,4 +42,3 @@ def list_n_states():
 if __name__ == "__main__":
     # Ensure the script does not execute when imported
     list_n_states()
-
