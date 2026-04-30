@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-This module provides a script that lists all states with a name starting
-with 'N' from the database hbtn_0e_0_usa.
+Lists all states with a name starting with N (upper N)
+from the database hbtn_0e_0_usa.
 """
 import MySQLdb
 import sys
@@ -9,42 +9,35 @@ import sys
 
 def list_n_states():
     """
-    Connects to the database and prints states starting with 'N'
-    sorted by their id.
+    Connects to the database and fetches states starting with 'N'.
     """
-    # Extracting arguments from sys.argv
-    u_name = sys.argv[1]
-    u_pass = sys.argv[2]
-    d_name = sys.argv[3]
-
-    # Connecting to the MySQL server on localhost at port 3306
+    # Arguments: 1: username, 2: password, 3: database name
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=u_name,
-        passwd=u_pass,
-        db=d_name
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3]
     )
 
-    # Creating a cursor object to execute SQL commands
     cursor = db.cursor()
+    
+    # Using format to include the 'N%' filter
+    # Sorting by states.id ASC
+    query = "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
+    cursor.execute(query)
 
-    # Executing SQL query with a filter for names starting with 'N'
-    # The BINARY keyword ensures the search is case-sensitive if needed
-    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
-
-    # Fetching all rows from the executed query
     rows = cursor.fetchall()
-
-    # Printing each row in the (id, name) format
     for row in rows:
-        print(row)
+        # Printing only if name starts with 'N' (additional check)
+        if row[1][0] == 'N':
+            print(row)
 
-    # Closing the cursor and the database connection
     cursor.close()
     db.close()
 
 
 if __name__ == "__main__":
-    # Prevent execution when the script is imported
-    list_n_states()
+    # Ensure script only runs if exactly 3 arguments are provided
+    if len(sys.argv) == 4:
+        list_n_states()
