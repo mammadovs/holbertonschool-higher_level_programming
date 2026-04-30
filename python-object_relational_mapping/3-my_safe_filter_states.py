@@ -1,46 +1,37 @@
 #!/usr/bin/python3
 """
-This module provides a script that safely displays all values in the
-states table of hbtn_0e_0_usa where name matches the argument.
-It is protected against MySQL injection.
+This module lists all states from the database hbtn_0e_0_usa
+where name matches the argument, safe from MySQL injections.
 """
 import MySQLdb
-import sys
+from sys import argv
 
 
-def safe_filter_states():
-    """
-    Connects to the database and searches for a state name securely
-    using parameterized queries to prevent SQL injection.
-    """
-    # Arguments: 1: user, 2: password, 3: db name, 4: state name searched
+if __name__ == "__main__":
+    # Connecting to the database using arguments from argv
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3]
+        user=argv[1],
+        passwd=argv[2],
+        db=argv[3]
     )
 
+    # Creating cursor to execute the query
     cursor = db.cursor()
 
-    # We use %s as a placeholder for the variable.
-    # MySQLdb will automatically escape any malicious SQL characters.
+    # %s is the placeholder for the argument to prevent SQL Injection
+    # BINARY ensures the search is case-sensitive
     query = "SELECT * FROM states WHERE name = BINARY %s ORDER BY id ASC"
-    
-    # The variable must be passed as a tuple: (sys.argv[4],)
-    cursor.execute(query, (sys.argv[4],))
 
+    # Passing argv[4] inside a tuple to the execute method
+    cursor.execute(query, (argv[4],))
+
+    # Fetching and printing results
     rows = cursor.fetchall()
     for row in rows:
         print(row)
 
-    # Closing all connections
+    # Closing cursor and connection
     cursor.close()
     db.close()
-
-
-if __name__ == "__main__":
-    # Ensure script only runs if 4 arguments are provided
-    if len(sys.argv) == 5:
-        safe_filter_states()
