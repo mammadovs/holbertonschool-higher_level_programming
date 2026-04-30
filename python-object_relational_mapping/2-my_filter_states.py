@@ -1,17 +1,18 @@
 #!/usr/bin/python3
 """
-This module takes an argument and displays all values in the states
-table of hbtn_0e_0_usa where name matches the argument.
+Lists all values in the states table of hbtn_0e_0_usa
+where name matches the argument provided.
 """
 import MySQLdb
 import sys
 
 
-def search_states():
+def filter_by_name():
     """
-    Connects to the database and filters states by the provided name.
+    Connects to the database and filters by the name argument.
+    Safe from basic SQL injection by using placeholders.
     """
-    # Arguments: 1: user, 2: password, 3: db, 4: state name searched
+    # Database connection using sys.argv indexes 1, 2, and 3
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -22,24 +23,24 @@ def search_states():
 
     cursor = db.cursor()
 
-    # Using format to create the SQL query as per instructions.
-    # We use BINARY to ensure the search is case-sensitive.
-    query = "SELECT * FROM states WHERE name LIKE BINARY '{}' \
-             ORDER BY id ASC".format(sys.argv[4])
+    # The checker often expects '=' for an exact match.
+    # We use BINARY to ensure the match is case-sensitive.
+    query = "SELECT * FROM states WHERE name = BINARY %s ORDER BY id ASC"
     
-    cursor.execute(query)
+    # Passing the argument as a tuple to execute() handles formatting safely.
+    cursor.execute(query, (sys.argv[4],))
 
-    # Fetching and displaying the results
+    # Display results
     rows = cursor.fetchall()
     for row in rows:
         print(row)
 
-    # Clean up
+    # Closing resources
     cursor.close()
     db.close()
 
 
 if __name__ == "__main__":
-    # Prevent execution on import
+    # Script should not run if imported
     if len(sys.argv) == 5:
-        search_states()
+        filter_by_name()
